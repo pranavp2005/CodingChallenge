@@ -11,19 +11,27 @@ import (
 )
 
 func main() {
-	fmt.Print("cmd> ")
 
 	reader := bufio.NewReader(os.Stdin)
-    line, err := reader.ReadString('\n')
-    if err != nil {
-        log.Fatal(err)
-    }
 
-	line = strings.TrimSpace(line)
-	line = strings.Trim(line, "\n")
+	for {
+		fmt.Print("cmd> ")
+		line, err := reader.ReadString('\n')
+		if err != nil {
+			log.Fatal(err)
+		}
+	
+		line = strings.TrimSpace(line)
+		line = strings.Trim(line, "\n")
+		if strings.EqualFold("exit", line) {
+			break
+		}
+		input := strings.Split(line, " ")
+		executeInput(input)
+	}
+}
 
-	input := strings.Split(line, " ")
-
+func executeInput(input []string) {
 	var wg sync.WaitGroup
 	wg.Add(1)
 	go func ()  {
