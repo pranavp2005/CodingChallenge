@@ -15,7 +15,7 @@ func main() {
 	reader := bufio.NewReader(os.Stdin)
 
 	for {
-		fmt.Print("cmd> ")
+		fmt.Print("\ncmd> ")
 		line, err := reader.ReadString('\n')
 		if err != nil {
 			log.Fatal(err)
